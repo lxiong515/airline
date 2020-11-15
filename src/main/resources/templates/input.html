@@ -3,12 +3,31 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Input View</title>
+<script type = "text/javascript">
+
+          function validate() {
+      
+         if( document.myForm.firstName.value == "" ) {
+            alert( "Please provide your First Name." );
+            document.myForm.firstName.focus() ;
+            return false;
+         }
+         if( document.myForm.lastName.value == "" ) {
+            alert( "Please provide your Last Name." );
+            document.myForm.lastName.focus() ;
+            return false;
+         }         
+         return( true );
+      }
+      </script>
 </head>
 <body>
 <h1>This is where customers will enter their information to make a reservation.</h1>
 <p>When input is submitted, redirect customer to reservation list.</p>
-<p>Add JavaScript for input validation</p>
-<form>
+<!--  Added JavaScript for input validation -->
+<form name="myForm" onsubmit="return(validate());" th:object="${newCustomer}"th:action="@{/input}" method='POST'>
+First Name: <input firstName="firstName" size="20"><br />
+Last Name: <input lastName="lastName" size="20"><br />
 <input name="submit" type="submit" value="submit" />
 </form>
 </body>
