@@ -41,6 +41,12 @@ public class CustomerController {
 		Customer c = custRepo.findById(id).orElse(null);
 		custRepo.delete(c);
 		return viewAllCustomers(model);
+	}*/
+	@GetMapping("/input")
+	public String addNewCustomer(Model model) {
+		Customer c = new Customer();
+		model.addAttribute("newCustomer", c);
+		return "input";
 	}
-	*/
+	
 }

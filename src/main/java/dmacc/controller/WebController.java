@@ -32,18 +32,8 @@ public class WebController {
 		model.addAttribute("customers",custRepo.findAll());
 		return "results";
 	}
-	@GetMapping("/input")
-	public String addNewCustomer(Model model) {
-		Customer c = new Customer();
-		model.addAttribute("newCustomer", c);
-		return "input";
-	}
-	@GetMapping("/flightList")
-	public String viewAllFlights(Model model) {
-		model.addAttribute("flights", flightRepo.findAll());
-		return "flightList";
-	}
-	/*
+	
+	/*//added this to the CustomerController - method viewallCustomers doesnt work there
 	@PostMapping("/input")
 	public String addNewCustomer(@ModelAttribute Customer c, Model model) {
 		custRepo.save(c);
@@ -61,19 +51,7 @@ public class WebController {
 		model.addAttribute("newFlight", f);
 		return "employee";
 	}
-	/*
-	@GetMapping("/customer")
-	public String viewCustomer(Model model) {
-		//added all the classes just in case
-				//feel free to change info below
-		Customer c = new Customer();
-		model.addAttribute("newCustomer", c);
-		CustomerReservation cr = new CustomerReservation();
-		model.addAttribute("newReservation", cr);
-		Flight f = new Flight();
-		model.addAttribute("newFlight", f);
-		return "customer";
-	}*/
+
 	@GetMapping("/delete/{id}")
 	public String deleteCustomer(@PathVariable("id") long id, Model model) {
 		Customer c = custRepo.findById(id).orElse(null);
