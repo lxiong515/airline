@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Flight List</title>
+</head>
+<body>
+<form>
+<table>
+<tr th:each="currentFlight : ${flights}">
+<td th:text="${currentFlight.id}"/>
+<td th:text="${currentFlight.departCity}"/>
+<td th:text="${currentFlight.destinCity}"/>
+<td th:text="${currentFlight.capacity}"/>
+<td th:text="${currentFlight.seatCostAmt}"/>
+</tr>
+</table>
+</form>
+<p><a href="/input">Add a new customer</a></p>
+<p><a href="/index.html">Return to Home</a><br /></p>
+</body>
+</html>

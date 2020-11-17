@@ -28,7 +28,7 @@ public class AirlineReservationsApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(AirlineReservationsApplication.class, args);
 	}
-		/* -lx
+		
 		//ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 		//Customer c = appContext.getBean("customer", Customer.class);
 		//System.out.println(c.toString());
@@ -40,7 +40,7 @@ public class AirlineReservationsApplication{
 		@Autowired
 		CustomerReservationRepository crRepo;
 
-		@Override
+		//@Override
 		public void run(String... args) throws Exception {
 			System.out.println("hello");
 			
@@ -77,7 +77,7 @@ public class AirlineReservationsApplication{
 			for(Flight destination: allFlights) {
 				System.out.println(destination.toString());
 			}
-			//((AbstractApplicationContext) appContext).close();
+			((AbstractApplicationContext) appContext).close();
 			
 			List<Customer> allCustomers = custRepo.findAll();
 			for(Customer people: allCustomers) {
@@ -87,7 +87,7 @@ public class AirlineReservationsApplication{
 			((AbstractApplicationContext) appContext).close();
 
 		}
-		*/
+		
 	}
 
 	/**
