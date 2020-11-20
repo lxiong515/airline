@@ -17,4 +17,9 @@ public class FlightController {
 	@Autowired
 	FlightRepository flightRepo;
 	
+	@GetMapping("/flightList")
+	public String viewAllFlights(Model model) {
+		model.addAttribute("flights", flightRepo.findAll());
+		return "flightList";
+	}
 }

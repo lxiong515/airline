@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Employee View</title>
+<meta charset="UTF-8">
+<title>Flight List</title>
 <style>
 	
 *. {
@@ -39,9 +39,6 @@ header {	display:flex;
 			border-top-left-radius:15px;
 			border-top-right-radius:15px;
 		}
-p {
-text-align:center;
-}
 h2 {
 text-align:center;
 }
@@ -67,37 +64,37 @@ table, th, td {
 			
 .callout {
 		padding:10px;
-		flex-basis:25%;
+		flex-basis:40%;
 			}
 
 /* The pseudo-class nth child allows us to give different styling to each div in the callout class. In this case we gave each one a different background color. */	
-.callout:nth-child(1) {background-color:#c9dbe2;}
+.callout:nth-child(1) {background-color:#ccb9da;}
 .callout:nth-child(2) {background-color:#cdf1c3;}
-.callout:nth-child(3) {background-color:#ccb9da;}
-.callout:nth-child(4) {background-color:#c9dbe2;}
 			
 	</style>
 </head>
 <body>
 <div class="flex-container">
 <header>
-<h1>This is the Employee View</h1>
+<h1>List of Flights</h1>
 </header>
-<h2>Choose an option below</h2>
-<br>
+<form>
+<table>
+<tr th:each="currentFlight : ${flights}">
+<td th:text="${currentFlight.id}"/>
+<td th:text="${currentFlight.departCity}"/>
+<td th:text="${currentFlight.destinCity}"/>
+<td th:text="${currentFlight.capacity}"/>
+<td th:text="${currentFlight.seatCostAmt}"/>
+</tr>
+</table>
+</form>
 <div class="calloutcontainer">
 <div class="callout">
-<a href="flightList">View All Flights</a><br />
+<p><a href="/input">Add a new customer</a></p>
 </div>
 <div class="callout">
-<a href="../input">Add a reservation</a>
-</div>
-<div class="callout">
-<a href="input">Add a new Customer (This goes to input.html)</a>
-</div>
-<div class="callout">
-<a href="/index.html">Return to Home</a><br />
-</div>
+<p><a href="/index.html">Return to Home</a><br /></p>
 </div>
 </div>
 </body>
