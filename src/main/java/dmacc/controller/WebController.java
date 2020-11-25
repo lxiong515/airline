@@ -27,11 +27,17 @@ public class WebController {
 	@Autowired
 	CustomerReservationRepository crRepo;
 	
-	@GetMapping("/viewAll")
+	@GetMapping("/customer")
 	public String viewAllCustomers(Model model) {
-		model.addAttribute("customers",custRepo.findAll());
-		return "results";
+		Customer c = new Customer();
+		model.addAttribute("newCustomer", c);
+		CustomerReservation cr = new CustomerReservation();
+		model.addAttribute("newReservation", cr);
+		Flight f = new Flight();
+		model.addAttribute("newFlight", f);
+		return "customer";
 	}
+	
 	
 	/*//added this to the CustomerController - method viewallCustomers doesnt work there
 	@PostMapping("/input")
@@ -52,12 +58,14 @@ public class WebController {
 		return "employee";
 	}
 
+	/**
 	@GetMapping("/delete/{id}")
 	public String deleteCustomer(@PathVariable("id") long id, Model model) {
 		Customer c = custRepo.findById(id).orElse(null);
 		custRepo.delete(c);
 		return viewAllCustomers(model);
 	}
+	*/
 		
 	
 }
