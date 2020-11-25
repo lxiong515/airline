@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert New or Edit Reservation</title>
+</head>
+<body>
+	<form th:object="${newReservation}" th:action="@{/updateReservation/{id}(id=${newReservation.id})}" method=POST>
+	<h1>Choose A Flight</h1>	
+	<table border="1">
+	<tr><td>ID</td><td>Seats Available</td><td>Depart City</td><td>Destination City</td><td>Price</td></tr>
+	<tr>
+ 	<td><input type = "radio" name ="flightId" value = "${currentFlight.id}"></td>
+ 	<td th:text="${currentFlight.capacity}">
+ 	<td th:text="${currentFlight.departCity}">
+ 	<td th:text="${currentFlight.destinCity}">
+ 	<td th:text="${currentFlight.seatCostAmt}">
+ 	</tr>
+	
+ 	</table>
+	<input name="Submit" type="submit" value="submit" />
+	</form>
+</body>
+</html>

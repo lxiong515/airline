@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta charset="UTF-8">
+<title>View All Reservations</title>
+</head>
+<body>
+<form>
+<table>
+	<tr th:each="currentCRS: ${reservations}">
+	<td th:text="${currentCRS.custId}" />
+	<td th:text="${currentCRS.flightId}" />
+	<td th:text="${currentCRS.seatIdentifierText}" />
+	<td><a th:href="@{/editReservation/{id}(id=${currentCRS.id})}">Edit</a></td>
+	<td><a th:href="@{/deleteReservation/{id}(id=${currentCRS.id})}">Delete</a></td>
+	</tr>
+</table>
+</form>
+<div class="calloutcontainer">
+<div class="callout">
+<p><a href="/inputRes">Add a new reservation</a></p>
+</div>
+<div class="callout">
+<p><a href="customer">Return to Customer Page</a><br /></p>
+</div>
+</div>
+</body>
+</html>

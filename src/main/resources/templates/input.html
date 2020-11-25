@@ -5,7 +5,7 @@
 <title>Input View</title>
 <style>
 	
-*. {
+*  {
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
@@ -97,10 +97,10 @@ table, th, td {
 </header>
 <p>When input is submitted, redirect customer to reservation list.</p>
 <!--  Added JavaScript for input validation -->
-<form name="myForm" onsubmit="return(validate());" th:object="${newCustomer}"th:action="@{/input}" method='POST'>
-<p>First Name: <input firstName="firstName" size="20"><br /></p>
-<p>Last Name: <input lastName="lastName" size="20"><br /></p>
-<p><input name="submit" type="submit" value="submit" /></p>
+<form name="myForm" onsubmit="return(validate());" th:object="${newCustomer}" th:action="@{/input}" method=POST>
+<p>First Name: <input name="firstName" size="20" th:field="*{firstName}"><br /></p>
+<p>Last Name: <input name="lastName" size="20" th:field="*{lastName}"><br /></p>
+<p><input name="Submit" type="submit" value="submit" /></p>
 </form>
 </div>
 </body>
