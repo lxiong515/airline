@@ -3,8 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <title>View All Reservations</title>
+<style>
+	
+*  {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	}
+	
+body  {
+		background-color:beige;
+		}
+
+
+	
+.flex-container {
+			display:flex;
+			width:75%;
+			font-family:Helvetica, Ariel, sans-serif;
+			margin: 20px auto;
+			background-color:white;
+			border:2px solid black;
+			border-radius:15px;
+			align-content:center;
+			justify-content:center;
+			flex-direction:column;
+			
+		}
+
+header {	display:flex;
+			justify-content:space-between;
+			background-color:#DBEAF0;
+			padding:.8em;
+			text-align:center;
+			border-top-left-radius:15px;
+			border-top-right-radius:15px;
+		}
+h2 {
+text-align:center;
+}
+
+table, th, td {
+  border: 1px solid black;
+  width: 100%;
+
+}	
+
+/* Column container. */
+.row {  
+    display: flex;
+    }
+	
+/* The following are the colored boxes "callouts" at the bottom of the page before the footer. Add display:flex to the container, then justify-content. Experiment with different values to see the effects. */
+.calloutcontainer {
+			max-width:75%;
+			margin:10px auto;
+			display:flex;
+			justify-content:space-between;
+			}
+			
+.callout {
+		padding:10px;
+		flex-basis:40%;
+			}
+
+/* The pseudo-class nth child allows us to give different styling to each div in the callout class. In this case we gave each one a different background color. */	
+.callout:nth-child(1) {background-color:#ccb9da;}
+.callout:nth-child(2) {background-color:#cdf1c3;}
+			
+	</style>
 </head>
 <body>
+<div class="flex-container">
+<header>
+<h1>List of Reservations</h1>
+</header>
 <form>
 <table>
 	<tr th:each="currentCRS: ${reservations}">
