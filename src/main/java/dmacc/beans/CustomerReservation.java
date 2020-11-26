@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class CustomerReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	// This is equivalent to the customer table id
 	private int custId;
 	// This is equivalent to the flight table id
@@ -30,7 +30,7 @@ public class CustomerReservation {
 		this.seatIdentifierText = seatIdentifierText;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

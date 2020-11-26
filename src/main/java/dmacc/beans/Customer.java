@@ -6,11 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String firstName;
 	private String lastName;
 	
@@ -24,7 +25,7 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -44,6 +45,7 @@ public class Customer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 
 	@Override
 	public String toString() {
