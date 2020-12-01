@@ -81,8 +81,10 @@ table, th, td {
 <form>
 <table>
 	<tr th:each="currentCRS: ${reservations}">
-	<td th:text="${currentCRS.custId}" />
-	<td th:text="${currentCRS.flightId}" />
+	<td th:text="${currentCRS.customer.firstName}" />
+	<td th:text="${currentCRS.customer.lastName}" />
+	<td th:text="${currentCRS.flight.departCity}" />
+	<td th:text="${currentCRS.flight.destinCity}" />		
 	<td th:text="${currentCRS.seatIdentifierText}" />
 	<td><a th:href="@{/editReservation/{id}(id=${currentCRS.id})}">Edit</a></td>
 	<td><a th:href="@{/deleteReservation/{id}(id=${currentCRS.id})}">Delete</a></td>
