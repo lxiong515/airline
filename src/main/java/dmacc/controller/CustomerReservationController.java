@@ -26,14 +26,14 @@ public class CustomerReservationController {
 		return "reservation";
 	}
 	
-	@GetMapping("/inputReservation")
+	@GetMapping("/inputRes")
 	public String addNewReservation(Model model) {
 		CustomerReservation cres = new CustomerReservation();
 		model.addAttribute("newReservation", cres);
 		return "inputRes";
 	}
 	
-	@PostMapping("/inputReservation")
+	@PostMapping("/inputRes")
 	public String addNewReservation(@ModelAttribute CustomerReservation cres, Model model) {
 		crRepo.save(cres);
 		return viewAllReservations(model);

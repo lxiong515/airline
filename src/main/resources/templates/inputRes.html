@@ -9,7 +9,7 @@
 	<h1>Choose A Flight</h1>	
 	<table border="1">
 	<tr><td>ID</td><td>Seats Available</td><td>Depart City</td><td>Destination City</td><td>Price</td></tr>
-	<tr>
+	<tr th:each="currentFlight : ${flights}">
  	<td><input type = "radio" name ="flightId" value = "${currentFlight.id}"></td>
  	<td th:text="${currentFlight.capacity}">
  	<td th:text="${currentFlight.departCity}">
