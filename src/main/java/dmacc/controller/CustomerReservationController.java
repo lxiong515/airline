@@ -8,14 +8,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import dmacc.beans.Customer;
 import dmacc.beans.CustomerReservation;
+import dmacc.beans.Flight;
+import dmacc.repository.CustomerRepository;
 import dmacc.repository.CustomerReservationRepository;
+import dmacc.repository.FlightRepository;
 
 @Controller
 public class CustomerReservationController {
 
 	@Autowired
 	CustomerReservationRepository crRepo;
+	@Autowired
+	CustomerRepository custRepo;
+	@Autowired
+	FlightRepository flightRepo;
 	
 	@GetMapping("/reservation")
 	public String viewAllReservations(Model model) {
@@ -26,18 +34,25 @@ public class CustomerReservationController {
 		return "reservation";
 	}
 	
-	@GetMapping("/inputReservation")
+	@GetMapping("/inputRes")
 	public String addNewReservation(Model model) {
 		CustomerReservation cres = new CustomerReservation();
 		model.addAttribute("newReservation", cres);
+		model.addAttribute("flights", flightRepo.findAll());
+		model.addAttribute("customers", custRepo.findAll());
 		return "inputRes";
 	}
 	
-	@PostMapping("/inputReservation")
-	public String addNewReservation(@ModelAttribute CustomerReservation cres, Model model) {
+	@PostMapping("/inputReservation/customer/{custId}/flight/{flightId}")
+	public String addReservation(Model model, long custId, long flightId) {
+		Customer myCust = custRepo.findById(custId).orElse(null);
+		Flight myFlight = flightRepo.findById(flightId).orElse(null);
+		CustomerReservation cres = new CustomerReservation("1A", myFlight, myCust );
 		crRepo.save(cres);
-		return viewAllReservations(model);
+		return "reservation";
 	}
+
+
 	
 	@GetMapping("/editReservation/{id}")
 	public String showUpdateReservation(@PathVariable("id") long id, Model model) {
