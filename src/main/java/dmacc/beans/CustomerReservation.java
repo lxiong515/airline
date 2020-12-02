@@ -37,7 +37,7 @@ public class CustomerReservation {
 		this.flight = flight;
 		this.customer = customer;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
