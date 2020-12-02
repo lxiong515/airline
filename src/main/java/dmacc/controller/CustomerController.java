@@ -1,7 +1,5 @@
 package dmacc.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,12 +60,17 @@ public class CustomerController {
 
 	@PostMapping("/update/{id}")
 	public String updateCustomer(@PathVariable("id") long id, Model model, Customer customer) {
-		Customer myCust = custRepo.findById(id).orElse(null);
-		myCust.setFirstName(customer.getFirstName());
-		myCust.setLastName(customer.getLastName());
-		custRepo.save(myCust);
+		if (id > 0) {
+			Customer myCust = custRepo.findById(id).orElse(null);
+			myCust.setFirstName(customer.getFirstName());
+			myCust.setLastName(customer.getLastName());
+			custRepo.save(myCust);
+		} else {
+			custRepo.save(customer);
+		}
+
 		return viewCustomer(model);
-	
+
 	}
 
 }
