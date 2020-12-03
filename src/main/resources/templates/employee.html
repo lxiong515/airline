@@ -3,102 +3,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee View</title>
-<style>
-	
-*  {
-	margin:0;
-	padding:0;
-	box-sizing:border-box;
-	}
-	
-body  {
-		background-color:beige;
-		}
-
-
-	
-.flex-container {
-			display:flex;
-			width:75%;
-			font-family:Helvetica, Ariel, sans-serif;
-			margin: 20px auto;
-			background-color:white;
-			border:2px solid black;
-			border-radius:15px;
-			align-content:center;
-			justify-content:center;
-			flex-direction:column;
-			
-		}
-
-header {	display:flex;
-			justify-content:space-between;
-			background-color:#DBEAF0;
-			padding:.8em;
-			text-align:center;
-			border-top-left-radius:15px;
-			border-top-right-radius:15px;
-		}
-p {
-text-align:center;
-}
-h2 {
-text-align:center;
-}
-
-table, th, td {
-  border: 1px solid black;
-  width: 100%;
-
-}	
-
-/* Column container. */
-.row {  
-    display: flex;
-    }
-	
-/* The following are the colored boxes "callouts" at the bottom of the page before the footer. Add display:flex to the container, then justify-content. Experiment with different values to see the effects. */
-.calloutcontainer {
-			max-width:75%;
-			margin:10px auto;
-			display:flex;
-			justify-content:space-between;
-			}
-			
-.callout {
-		padding:10px;
-		flex-basis:25%;
-			}
-
-/* The pseudo-class nth child allows us to give different styling to each div in the callout class. In this case we gave each one a different background color. */	
-.callout:nth-child(1) {background-color:#c9dbe2;}
-.callout:nth-child(2) {background-color:#cdf1c3;}
-.callout:nth-child(3) {background-color:#ccb9da;}
-.callout:nth-child(4) {background-color:#c9dbe2;}
-			
-	</style>
+<link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<div class="flex-container">
-<header>
-<h1>This is the Employee View</h1>
-</header>
-<h2>Choose an option below</h2>
-<br>
-<div class="calloutcontainer">
-<div class="callout">
-<a href="flightList">View All Flights</a><br />
-</div>
-<div class="callout">
-<a href="reservation">View All reservation</a>
-</div>
-<div class="callout">
-<a href="customerList">View All Customer (You can also add new customer)</a>
-</div>
-<div class="callout">
-<a href="/index.html">Return to Home</a><br />
-</div>
-</div>
-</div>
+	<div class="flex-container">
+		<header>
+			<h1>This is the Employee View</h1>
+		</header>
+		<h2>Choose an option below</h2>
+		<br>
+		<div class="calloutcontainer">
+			<div class="callout">
+				<a href="flightList">View All Flights</a><br />
+			</div>
+			<div class="callout">
+				<a href="reservation">View All reservation</a>
+			</div>
+			<div class="callout">
+				<a href="customerList">View All Customer (You can also add new
+					customer)</a>
+			</div>
+			<div class="callout">
+				<a href="/index.html">Return to Home</a><br />
+			</div>
+		</div>
+	</div>
 </body>
 </html>
