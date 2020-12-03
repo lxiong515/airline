@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New or Edit Reservation</title>
+<link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+	<div class="flex-container">
+		<header>
+			<h1>Add or Edit Reservation</h1>
+		</header>
 	<form>
 		<table>
 			<tr th:each="currentCus: ${customers}">
@@ -18,7 +23,8 @@
 	<form>
 		<table>
 			<tr th:each="currentFlight : ${flights}">
-				<td><input type="radio" name="flightId" value="${currentFlight.id}"></td>
+				<td><input type="radio" name="flightId"
+					value="${currentFlight.id}"></td>
 				<td th:text="${currentFlight.departCity}" />
 				<td th:text="${currentFlight.destinCity}" />
 				<td th:text="${currentFlight.capacity}" />
@@ -27,14 +33,15 @@
 		</table>
 	</form>
 
-	<a
-		href="/inputReservation/customer/{cusId}/flight/{flightId}">Create Reservation</a>
+	<a href="/inputReservation/customer/{cusId}/flight/{flightId}">Create
+		Reservation</a>
 
 	<div class="callout">
 		<p>
 			<a href="/index.html">Return to Home</a><br />
 		</p>
 	</div>
+</div>
 
 
 
