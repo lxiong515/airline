@@ -14,7 +14,6 @@
 		<form id="myCustForm">
 			<table>
 				<tr th:each="currentCus: ${customers}">
-					<td><input type="radio" name="cusId" value="${currentCus.id}"></td>
 					<td th:text="${currentCus.id}" />
 					<td th:text="${currentCus.firstName}" />
 					<td th:text="${currentCus.lastName}" />
@@ -24,7 +23,6 @@
 		<form id="myFlightForm">
 			<table>
 				<tr th:each="currentFlight : ${flights}">
-				<td><input type="radio" name="flightId" value="${currentFlight.id}"></td>
 					<td th:text="${currentFlight.id}" />
 					<td th:text="${currentFlight.departCity}" />
 					<td th:text="${currentFlight.destinCity}" />
@@ -35,28 +33,20 @@
 			<hr />
 		</form>
 
-		<form>
-			<div class="formBox">
-				<label for="custId">Customer Id:</label> <input type="text"
-					id="custId" placeholder="Customer Id" />
-			</div>
-			<div class="formBox">
-				<label for="flightId">Flight Id:</label> <input type="text"
-					id="flightId" placeholder="Flight Id" />
-			</div>
-				<div class="formBox">
-				<label for="seatId">Seat Id:</label> <input type="text"
-					id="seatId" placeholder="Seat Id" />
-			</div>
-			<div class="formBox">
-				<button id="btn">Click to Add</button>
-			</div>
-			<div id="msg">
-				<pre></pre>
-			</div>
+		<form class="form" id="myForm">
+
+				<label for="custId">Customer Id:</label> 
+				<input type="text" name="custId" id="custId" placeholder="Customer Id" /> 
+				
+				<label for="flightId">Flight Id:</label> 
+				<input type="text" name="flightId" id="flightId" placeholder="Flight Id" /> 
+				
+				<label for="seatId">Seat Id:</label> 
+				<input type="text" name="seatId" id="seatId" placeholder="Seat Id" />
+				
+				<button type="submit">Click to Add Reservation</button>
+
 		</form>
-
-
 
 		<div class="callout">
 			<p>
@@ -66,35 +56,48 @@
 	</div>
 
 	<script>
-let customerReservations = [];
-// example {custId:36, flightId: 6, seatIdentifierText: "2A"}
-const addCustomerReservation =(ev)=>{
-	ev.preventDefault();
-	let customerReservation ={
-			id: Date.now(),
-			custId: document.getElementById('custId').value,
-			flightId: document.getElementById('flightId').value,
-			seatId: document.getElementById('seatId').value
+	
+const myForm = document.getElementById('myForm');
+
+myForm.addEventListener('submit',function(e){
+	
+	// capture form data
+	const formData = new FormData(this);
+	// create object for url search parameters
+	const searchParams = new URLSearchParams();
+	// loop through form data and add as request parameters
+	for (const pair of formData){
+		searchParams.append(pair[0],pair[1]);
 	}
-	customerReservations.push(customerReservation);
-	document.forms[0].reset();
 	
-	//display purposes only
-	console.warn('added', {customerReservations});
-	let pre = document.querySelector('#msg pre');
-	pre.textContent='\n' + JSON.stringify(customerReservations,'\t',2);
+	// Prepare for fetch and add search parameters in the body
+	fetch('/inputReservation',{
+		method: 'post',
+		body: searchParams
+		
+	})
+	.then(response => response.text())
+	.then(console.log)
+
+}); // addEvemtListener
 	
 	
-	// move to local storage
-	localStorage.setItem('myCustReservations', JSON.stringify(customerReservations));
 	
-	}
+	
+	
+	
+	
+	
+	
+	
+
+
+	
 
 
 
-document.addEventListener('DOMContentLoaded', ()=>{
-	document.getElementById('btn').addEventListener('click',addCustomerReservation);	
-});
+
+
 </script>
 
 </body>
