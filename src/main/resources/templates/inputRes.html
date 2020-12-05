@@ -4,46 +4,98 @@
 <meta charset="UTF-8">
 <title>Insert New or Edit Reservation</title>
 <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body>
 	<div class="flex-container">
 		<header>
 			<h1>Add or Edit Reservation</h1>
 		</header>
-	<form>
-		<table>
-			<tr th:each="currentCus: ${customers}">
-				<td><input type="radio" name="cusId" value="${currentCus.id}"></td>
-				<td th:text="${currentCus.firstName}" />
-				<td th:text="${currentCus.lastName}" />
-			</tr>
-		</table>
-	</form>
+		<form id="myCustForm">
+			<table>
+				<tr th:each="currentCus: ${customers}">
+					<td><input type="radio" name="cusId" value="${currentCus.id}"></td>
+					<td th:text="${currentCus.id}" />
+					<td th:text="${currentCus.firstName}" />
+					<td th:text="${currentCus.lastName}" />
+				</tr>
+			</table>
+		</form>
+		<form id="myFlightForm">
+			<table>
+				<tr th:each="currentFlight : ${flights}">
+				<td><input type="radio" name="flightId" value="${currentFlight.id}"></td>
+					<td th:text="${currentFlight.id}" />
+					<td th:text="${currentFlight.departCity}" />
+					<td th:text="${currentFlight.destinCity}" />
+					<td th:text="${currentFlight.capacity}" />
+					<td th:text="${currentFlight.seatCostAmt}" />
+				</tr>
+			</table>
+			<hr />
+		</form>
 
-	<form>
-		<table>
-			<tr th:each="currentFlight : ${flights}">
-				<td><input type="radio" name="flightId"
-					value="${currentFlight.id}"></td>
-				<td th:text="${currentFlight.departCity}" />
-				<td th:text="${currentFlight.destinCity}" />
-				<td th:text="${currentFlight.capacity}" />
-				<td th:text="${currentFlight.seatCostAmt}" />
-			</tr>
-		</table>
-	</form>
+		<form>
+			<div class="formBox">
+				<label for="custId">Customer Id:</label> <input type="text"
+					id="custId" placeholder="Customer Id" />
+			</div>
+			<div class="formBox">
+				<label for="flightId">Flight Id:</label> <input type="text"
+					id="flightId" placeholder="Flight Id" />
+			</div>
+				<div class="formBox">
+				<label for="seatId">Seat Id:</label> <input type="text"
+					id="seatId" placeholder="Seat Id" />
+			</div>
+			<div class="formBox">
+				<button id="btn">Click to Add</button>
+			</div>
+			<div id="msg">
+				<pre></pre>
+			</div>
+		</form>
 
-	<a href="/inputReservation/customer/{cusId}/flight/{flightId}">Create
-		Reservation</a>
 
-	<div class="callout">
-		<p>
-			<a href="/index.html">Return to Home</a><br />
-		</p>
+
+		<div class="callout">
+			<p>
+				<a href="/index.html">Return to Home</a><br />
+			</p>
+		</div>
 	</div>
-</div>
+
+	<script>
+let customerReservations = [];
+// example {custId:36, flightId: 6, seatIdentifierText: "2A"}
+const addCustomerReservation =(ev)=>{
+	ev.preventDefault();
+	let customerReservation ={
+			id: Date.now(),
+			custId: document.getElementById('custId').value,
+			flightId: document.getElementById('flightId').value,
+			seatId: document.getElementById('seatId').value
+	}
+	customerReservations.push(customerReservation);
+	document.forms[0].reset();
+	
+	//display purposes only
+	console.warn('added', {customerReservations});
+	let pre = document.querySelector('#msg pre');
+	pre.textContent='\n' + JSON.stringify(customerReservations,'\t',2);
+	
+	
+	// move to local storage
+	localStorage.setItem('myCustReservations', JSON.stringify(customerReservations));
+	
+	}
 
 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+	document.getElementById('btn').addEventListener('click',addCustomerReservation);	
+});
+</script>
 
 </body>
 </html>
