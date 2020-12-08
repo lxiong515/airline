@@ -36,6 +36,7 @@ public class WebController {
 		Flight f = new Flight();
 		model.addAttribute("newFlight", f);
 		return "customer";
+		
 	}
 	
 	
