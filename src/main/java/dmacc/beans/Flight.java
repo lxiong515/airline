@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Flight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String departCity;
 	private String destinCity;
 	private int capacity;
@@ -27,10 +27,13 @@ public class Flight {
 		this.seatCostAmt = seatCostAmt;
 	}
 
-	public int getId() {
+
+
+	public long getId() {
 		return id;
 	}
 
+	
 
 	public String getDepartCity() {
 		return departCity;
@@ -70,6 +73,6 @@ public class Flight {
 				+ capacity + ", seatCostAmt=" + seatCostAmt + "]";
 	}
 
-	
+
 
 }
