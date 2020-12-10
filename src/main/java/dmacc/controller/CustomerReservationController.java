@@ -71,7 +71,7 @@ public class CustomerReservationController {
 	}
 	
 	@GetMapping("/deleteReservation/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
+	public String deleteCustomerReservation(@PathVariable("id") long id, Model model) {
 		CustomerReservation cres = crRepo.findById(id).orElse(null);
 		crRepo.delete(cres);
 		return viewAllReservations(model);
