@@ -13,6 +13,11 @@
 		</header>
 		<form id="myCustForm">
 			<table>
+				<tr>
+					<th>Customer Number</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
 				<tr th:each="currentCus: ${customers}">
 					<td th:text="${currentCus.id}" />
 					<td th:text="${currentCus.firstName}" />
@@ -22,6 +27,12 @@
 		</form>
 		<form id="myFlightForm">
 			<table>
+				<tr>
+					<th>Id</th>
+					<th>Departing City</th>
+					<th>Destination City</th>
+					<th>Capacity</th>
+					<th>Seat Cost</th>
 				<tr th:each="currentFlight : ${flights}">
 					<td th:text="${currentFlight.id}" />
 					<td th:text="${currentFlight.departCity}" />
