@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add New Flight information</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<form th:object="${newFlight}" th:action="@{/updateFlight/{id}(id=${newFlight.id})}" method=post>
+	<p> Flight Depart City <input name="departCity" size="20" th:field="*{departCity}"><br /></p>
+	<p> Flight Destine City <input name="destinCity" size="20" th:field="*{destinCity}"><br /></p>
+	<p> Flight Capacity <input name="capacity" size="20" th:field="*{capacity}"><br /></p>
+	<p> Seat Cost <input name="seatCostAmt" size="20" th:field="*{seatCostAmt}"><br /></p>
+	<p><input name="Submit" type="submit" value="submit" /></p>	
+	</form>
+	<div class="calloutcontainer">
+	<div class="callout">
+	<p><a href="/index.html">Return to Home</a><br /></p>
+	</div>
+	</div>
+</body>
+</html>
