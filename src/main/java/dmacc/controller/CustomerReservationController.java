@@ -1,5 +1,7 @@
 package dmacc.controller;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Customer;
 import dmacc.beans.CustomerReservation;
@@ -43,17 +46,17 @@ public class CustomerReservationController {
 		return "inputRes";
 	}
 	
-	@PostMapping("/inputReservation/customer/{custId}/flight/{flightId}")
-	public String addReservation(Model model, long custId, long flightId) {
-		Customer myCust = custRepo.findById(custId).orElse(null);
-		Flight myFlight = flightRepo.findById(flightId).orElse(null);
-		CustomerReservation cres = new CustomerReservation("1A", myFlight, myCust );
+	@PostMapping("/inputReservation")
+	public String addReservation(Model model, @RequestParam String custId, @RequestParam String flightId, @RequestParam String seatId) {
+		long tempCustId = Long.parseLong(custId);
+		long tempFlightId = Long.parseLong(flightId);
+		Customer myCust = custRepo.findById(tempCustId).orElse(null);
+		Flight myFlight = flightRepo.findById(tempFlightId).orElse(null);
+		CustomerReservation cres = new CustomerReservation(seatId, myFlight, myCust );
 		crRepo.save(cres);
-		return "reservation";
+		return viewAllReservations(model);
 	}
 
-
-	
 	@GetMapping("/editReservation/{id}")
 	public String showUpdateReservation(@PathVariable("id") long id, Model model) {
 		CustomerReservation cres = new CustomerReservation();
@@ -68,7 +71,7 @@ public class CustomerReservationController {
 	}
 	
 	@GetMapping("/deleteReservation/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
+	public String deleteCustomerReservation(@PathVariable("id") long id, Model model) {
 		CustomerReservation cres = crRepo.findById(id).orElse(null);
 		crRepo.delete(cres);
 		return viewAllReservations(model);
