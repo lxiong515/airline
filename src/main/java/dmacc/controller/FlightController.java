@@ -22,4 +22,31 @@ public class FlightController {
 		model.addAttribute("flights", flightRepo.findAll());
 		return "flightList";
 	}
+	
+	@GetMapping("/inputFlight")
+	public String addNewFlight(Model model) {
+		Flight f = new Flight();
+		model.addAttribute("newFlight", f);
+		return "inputFlight";
+	}
+	
+	@PostMapping("inputFlight")
+	public String addNewFlight(@ModelAttribute Flight f, Model model) {
+		flightRepo.save(f);
+		return viewAllFlights(model);
+	}
+	@PostMapping("/updateFlight/{id}")
+	public String updateFlights(@PathVariable("id") long id, Model model, Flight flight) {
+		if(id > 0) {
+			Flight newFlight = flightRepo.findById(id).orElse(null);
+			newFlight.setDepartCity(flight.getDepartCity());
+			newFlight.setDestinCity(flight.getDestinCity());
+			newFlight.setCapacity(flight.getCapacity());
+			newFlight.setSeatCostAmt(flight.getSeatCostAmt());
+			flightRepo.save(newFlight);
+		}else {
+			flightRepo.save(flight);
+		}
+		return viewAllFlights(model);
+	}
 }
