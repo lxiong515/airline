@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pick A Seat</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div class="flex-container">
+		<header>
+			<h1>Pick a Seat</h1>
+		</header>
+		<form th:object="${newReservation}" th:action="@{/updateReservation/{id}(id=${id})}" method="post">
+			<input name="flight" th:field="*{flight}" type="hidden" />
+			<input name="customer" th:field="*{customer}" type="hidden" />
+			<div th:each="seat : ${#numbers.sequence(1,newReservation.flight.capacity/2)}">
+				<input th:disabled="${#arrays.contains(seatsTaken, seat + 'A') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}" 
+				type="radio" th:value="${seat + 'A'}" th:field="*{seatIdentifierText}" th:text="${seat + 'A'}" 
+				th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}"/>
+				<input th:disabled="${#arrays.contains(seatsTaken, seat + 'B') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}" 
+				type="radio" th:value="${seat + 'B'}" th:field="*{seatIdentifierText}" th:text="${seat + 'B'}" 
+				th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}"/>
+			</div>
+			<input name="id" th:value="${id}" type="hidden" />
+			<input type="submit" name="submit" value="submit" />
+		</form>
+	</div>
+</body>
+</html>
