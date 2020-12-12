@@ -47,55 +47,7 @@
 			<input type="hidden" name="id" th:field="${newReservation.id}" />
 			<input type="submit" value="Choose Seats" />
 		</form>
-		<!--
-		<form id="myCustForm">
-			<table>
-				<tr>
-					<th>Customer Number</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-				</tr>
-				<tr th:each="currentCus: ${customers}">
-					<td th:text="${currentCus.id}" />
-					<td th:text="${currentCus.firstName}" />
-					<td th:text="${currentCus.lastName}" />
-				</tr>
-			</table>
-		</form>
-		<form id="myFlightForm">
-			<table>
-				<tr>
-					<th>Id</th>
-					<th>Departing City</th>
-					<th>Destination City</th>
-					<th>Capacity</th>
-					<th>Seat Cost</th>
-				<tr th:each="currentFlight : ${flights}">
-					<td th:text="${currentFlight.id}" />
-					<td th:text="${currentFlight.departCity}" />
-					<td th:text="${currentFlight.destinCity}" />
-					<td th:text="${currentFlight.capacity}" />
-					<td th:text="${currentFlight.seatCostAmt}" />
-				</tr>
-			</table>
-			<hr />
-		</form>
-
-		<form class="form" id="myForm">
-
-				<label for="custId">Customer Id:</label> 
-				<input type="text" name="custId" id="custId" placeholder="Customer Id" /> 
-				
-				<label for="flightId">Flight Id:</label> 
-				<input type="text" name="flightId" id="flightId" placeholder="Flight Id" /> 
-				
-				<label for="seatId">Seat Id:</label> 
-				<input type="text" name="seatId" id="seatId" placeholder="Seat Id" />
-				
-				<button type="submit">Click to Add Reservation</button>
-
-		</form>
--->
+		
 		<div class="callout">
 			<p>
 				<a href="/index.html">Return to Home</a><br />
@@ -103,35 +55,6 @@
 		</div>
 	</div>
 
-	<script>
-		/*	
-		 const myForm = document.getElementById('myForm');
-
-		 myForm.addEventListener('submit',function(e){
-		
-		 // capture form data
-		 const formData = new FormData(myForm);
-		 // create object for url search parameters
-		 const searchParams = new URLSearchParams();
-		 // loop through form data and add as request parameters
-		 for (const pair of formData){
-		 searchParams.append(pair[0],pair[1]);
-		 }
-		
-		 // Prepare for fetch and add search parameters in the body
-		 fetch('/inputReservation',{
-		 method: 'post',
-		 body: searchParams
-		
-		 })
-		 .then(response => response.text())
-		 .then(console.log)
-
-		 }); // addEvemtListener
-		
-		
-		 */
-	</script>
 
 </body>
 </html>
