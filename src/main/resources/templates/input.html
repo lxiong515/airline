@@ -27,7 +27,7 @@
 <header>
 <h1>This is where customers will enter their information to make a reservation.</h1>
 </header>
-<p>When input is submitted, redirect customer to reservation list.</p>
+<p>When input is submitted, redirect customer to customer list.</p>
 <!--  Added JavaScript for input validation -->
 <form name="myForm" onsubmit="return(validate());" th:object="${newCustomer}" th:action="@{/update/{id}(id=${newCustomer.id})}" method=POST>
 <p>First Name: <input name="firstName" size="20" th:field="*{firstName}"><br /></p>
