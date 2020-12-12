@@ -6,35 +6,43 @@
 <link type="text/css" rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div class="flex-container">
-<header>
-<h1>List of Flights</h1>
-</header>
-<form>
-<table>
-<tr>
-<th>Id</th>
-<th>Departing City</th>
-<th>Destination City</th>
-<th>Capacity</th>
-<th>Seat Cost</th>
-<tr th:each="currentFlight : ${flights}">
-<td th:text="${currentFlight.id}"/>
-<td th:text="${currentFlight.departCity}"/>
-<td th:text="${currentFlight.destinCity}"/>
-<td th:text="${currentFlight.capacity}"/>
-<td th:text="${#numbers.formatCurrency(currentFlight.seatCostAmt)}" />
-</tr>
-</table>
-</form>
-<div class="calloutcontainer">
-<div class="callout">
-<p><a href="/input">Make a Reservation</a></p>
-</div>
-<div class="callout">
-<p><a href="/index.html">Return to Home Page</a><br /></p>
-</div>
-</div>
-</div>
+	<div class="flex-container">
+		<header>
+			<h1>List of Flights</h1>
+		</header>
+		<form>
+			<table>
+				<tr>
+					<th>Id</th>
+					<th>Departing City</th>
+					<th>Destination City</th>
+					<th>Capacity</th>
+					<th>Seat Cost</th>
+					<th></th>
+				<tr th:each="currentFlight : ${flights}">
+					<td th:text="${currentFlight.id}" />
+					<td th:text="${currentFlight.departCity}" />
+					<td th:text="${currentFlight.destinCity}" />
+					<td th:text="${currentFlight.capacity}" />
+					<td th:text="${#numbers.formatCurrency(currentFlight.seatCostAmt)}" />
+					<td><a
+						th:href="@{/flightInformation/{id}(id=${currentFlight.id})}">Flight
+							Info</a></td>
+				</tr>
+			</table>
+		</form>
+		<div class="calloutcontainer">
+			<div class="callout">
+				<p>
+					<a href="/input">Make a Reservation</a>
+				</p>
+			</div>
+			<div class="callout">
+				<p>
+					<a href="/index.html">Return to Home Page</a><br />
+				</p>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

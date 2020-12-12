@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Fight Information</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div class="flex-container">
+		<header>
+			<h1>Flight Information</h1>
+		</header>
+		<h3>
+			Flight: <span th:text="${flight.id}"></span>
+		</h3>
+		<p>
+			Departing: <span th:text="${flight.departCity}"></span>
+		</p>
+		<p>
+			Destination: <span th:text="${flight.destinCity}"></span>
+		</p>
+		<h2>Seats</h2>
+		<div th:class="seatDisplay">
+			<div th:if="${flight.capacity < 30}"
+				th:each="seat: ${#numbers.sequence(1,flight.capacity/2)}">
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'A'}__')}" th:id="${seat + 'A'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'A'}__')}', '${seat+'A'}')|"><label th:for="${seat+ 'A'}" th:text="${seat +'A'}"></label>
+				<span class="aisle">--A--</span>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'B'}__')}" th:id="${seat + 'B'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'B'}__')}', '${seat+'B'}')|"><label th:for="${seat+ 'B'}" th:text="${seat +'B'}"></label>
+			</div>
+			<div th:if="${flight.capacity > 30 and flight.capacity < 121}"
+				th:each="seat: ${#numbers.sequence(1,flight.capacity/4)}">
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'A'}__')}" th:id="${seat + 'A'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'A'}__')}', '${seat+'A'}')|"><label th:for="${seat+ 'A'}" th:text="${seat +'A'}"></label>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'B'}__')}" th:id="${seat + 'B'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'B'}__')}', '${seat+'B'}')|"><label th:for="${seat+ 'B'}" th:text="${seat +'B'}"></label>
+				<span class="aisle">--A--</span>
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'C'}__')}" th:id="${seat + 'C'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'C'}__')}', '${seat+'C'}')|"><label th:for="${seat+ 'C'}" th:text="${seat +'C'}"></label>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'D'}__')}" th:id="${seat + 'D'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'D'}__')}', '${seat+'D'}')|"><label th:for="${seat+ 'D'}" th:text="${seat +'D'}"></label>
+			</div>
+			<div th:if="${flight.capacity > 120}"
+				th:each="seat: ${#numbers.sequence(1,flight.capacity/6)}">
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'A'}__')}" th:id="${seat + 'A'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'A'}__')}', '${seat+'A'}')|"><label th:for="${seat+ 'A'}" th:text="${seat +'A'}"></label>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'B'}__')}" th:id="${seat + 'B'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'B'}__')}', '${seat+'B'}')|"><label th:for="${seat+ 'B'}" th:text="${seat +'B'}"></label>
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'C'}__')}" th:id="${seat + 'C'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'C'}__')}', '${seat+'C'}')|"><label th:for="${seat+ 'C'}" th:text="${seat +'C'}"></label>
+				<span class="aisle">--A--</span>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'D'}__')}" th:id="${seat + 'D'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'D'}__')}', '${seat+'D'}')|"><label th:for="${seat+ 'D'}" th:text="${seat +'D'}"></label>
+				<input type="radio" th:disabled="${!reservations.containsKey('__${seat + 'E'}__')}" th:id="${seat + 'E'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'E'}__')}', '${seat+'E'}')|"><label th:for="${seat+ 'E'}" th:text="${seat +'E'}"></label>
+				<input type="radio"	th:disabled="${!reservations.containsKey('__${seat + 'F'}__')}" th:id="${seat + 'F'}" name="seat" th:attr="onclick=|display('${reservations.get('__${seat+'F'}__')}', '${seat+'F'}')|"><label th:for="${seat+ 'F'}" th:text="${seat +'F'}"></label>
+			</div>
+		</div>
+		<div class="output"></div>
+		<script>
+			function display(reservation, seat) {
+				
+				document.querySelector(".output").innerHTML = seat + ": " + reservation;
+			}
+		</script>
+		<div class="calloutcontainer">
+			<div class="callout">
+				<p>
+					<a href="/flightList">Return to Flight List</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
