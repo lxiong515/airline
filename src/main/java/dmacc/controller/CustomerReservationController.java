@@ -51,7 +51,6 @@ public class CustomerReservationController {
 		for (int i = 0; i < reservations.size(); i++) {
 			seatsTaken[i] = reservations.get(i).getSeatIdentifierText();
 		}
-		System.out.println(id);
 		model.addAttribute("seatsTaken", seatsTaken);
 		model.addAttribute("newReservation", cres);
 		model.addAttribute("id", id);
