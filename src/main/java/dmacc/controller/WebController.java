@@ -1,5 +1,9 @@
 package dmacc.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +62,21 @@ public class WebController {
 		model.addAttribute("newFlight", f);
 		return "employee";
 	}
+	
+	@GetMapping("/flightInformation/{id}")
+	public String viewFlight(Model model ,@PathVariable("id") long id) {
+		Flight flight = flightRepo.findById(id).orElse(null);
+		List<CustomerReservation> reservations = crRepo.findByFlight_Id(id);
+		Map<String, String> resMap= new HashMap<String, String>();
+		for(CustomerReservation res : reservations) {
+			resMap.put(res.getSeatIdentifierText(),res.getCustomer().getFirstName() + " " + res.getCustomer().getLastName());
+		}
+		model.addAttribute("reservations", resMap);
+		model.addAttribute("flight", flight);
+		return "flightInfo";
+	}
+	
+	
 
 	/**
 	@GetMapping("/delete/{id}")

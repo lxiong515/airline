@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New or Edit Reservation</title>
-<link rel="stylesheet" href="./css/style.css">
+<link type="text/css" rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -11,7 +11,9 @@
 		<header>
 			<h1>Add or Edit Reservation</h1>
 		</header>
-		<form id="myCustForm">
+
+		<form th:object="${newReservation}" th:action="@{/inputReservation/{id}(id=${newReservation.id})}"
+			method="post">
 			<table>
 				<tr>
 					<th>Customer Number</th>
@@ -24,11 +26,9 @@
 					<td th:text="${currentCus.lastName}" />
 				</tr>
 			</table>
-		</form>
-		<form id="myFlightForm">
 			<table>
 				<tr>
-					<th>Id</th>
+					<th></th>
 					<th>Departing City</th>
 					<th>Destination City</th>
 					<th>Capacity</th>
@@ -41,24 +41,13 @@
 					<td th:text="${currentFlight.seatCostAmt}" />
 				</tr>
 			</table>
-			<hr />
+			<input type="text" th:field="*{customer}" placeholder="Customer Id" /> 
+			<input type="text" th:field="*{flight}" placeholder="Flight Id" /> 
+			<input type="hidden" name="seat" th:field="*{seatIdentifierText}" />
+			<input type="hidden" name="id" th:field="${newReservation.id}" />
+			<input type="submit" value="Choose Seats" />
 		</form>
-
-		<form class="form" id="myForm">
-
-				<label for="custId">Customer Id:</label> 
-				<input type="text" name="custId" id="custId" placeholder="Customer Id" /> 
-				
-				<label for="flightId">Flight Id:</label> 
-				<input type="text" name="flightId" id="flightId" placeholder="Flight Id" /> 
-				
-				<label for="seatId">Seat Id:</label> 
-				<input type="text" name="seatId" id="seatId" placeholder="Seat Id" />
-				
-				<button type="submit">Click to Add Reservation</button>
-
-		</form>
-
+		
 		<div class="callout">
 			<p>
 				<a href="/index.html">Return to Home</a><br />
@@ -66,50 +55,6 @@
 		</div>
 	</div>
 
-	<script>
-	
-const myForm = document.getElementById('myForm');
-
-myForm.addEventListener('submit',function(e){
-	
-	// capture form data
-	const formData = new FormData(this);
-	// create object for url search parameters
-	const searchParams = new URLSearchParams();
-	// loop through form data and add as request parameters
-	for (const pair of formData){
-		searchParams.append(pair[0],pair[1]);
-	}
-	
-	// Prepare for fetch and add search parameters in the body
-	fetch('/inputReservation',{
-		method: 'post',
-		body: searchParams
-		
-	})
-	.then(response => response.text())
-	.then(console.log)
-
-}); // addEvemtListener
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-	
-
-
-
-
-
-</script>
 
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pick A Seat</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div class="flex-container">
+		<header>
+			<h1>Pick a Seat</h1>
+		</header>
+		<form th:object="${newReservation}" th:action="@{/updateReservation/{id}(id=${id})}" method="post" class="seatForm">
+			<input name="flight" th:field="*{flight}" type="hidden" />
+			<input name="customer" th:field="*{customer}" type="hidden" />
+			<div th:class="seatDisplay">
+				<div th:if="${newReservation.flight.capacity < 30}"
+					th:each="seat : ${#numbers.sequence(1,newReservation.flight.capacity/2)}">
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'A') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}" 
+					type="radio" th:value="${seat + 'A'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'A'}"></label>
+					<span class="aisle">--A--</span>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'B') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}" 
+					type="radio" th:value="${seat + 'B'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'B'}"></label>
+				</div>
+				<div th:if="${newReservation.flight.capacity > 30 and flight.capacity < 121}"
+					th:each="seat : ${#numbers.sequence(1,newReservation.flight.capacity/4)}">
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'A') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}" 
+					type="radio" th:value="${seat + 'A'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'A'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'B') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}" 
+					type="radio" th:value="${seat + 'B'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'B'}"></label>
+					<span class="aisle">----</span>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'C') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'C'))}" 
+					type="radio" th:value="${seat + 'C'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'C'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'C'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'D') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'D'))}" 
+					type="radio" th:value="${seat + 'D'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'D'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'D'}"></label>
+				</div>
+				<div th:if="${newReservation.flight.capacity > 120}"
+				th:each="seat : ${#numbers.sequence(1,newReservation.flight.capacity/6)}">
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'A') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}" 
+					type="radio" th:value="${seat + 'A'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'A'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'A'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'B') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}" 
+					type="radio" th:value="${seat + 'B'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'B'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'B'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'C') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'C'))}" 
+					type="radio" th:value="${seat + 'C'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'C'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'C'}"></label>
+					<span class="aisle">----</span>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'D') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'D'))}" 
+					type="radio" th:value="${seat + 'D'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'D'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'D'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'E') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'E'))}" 
+					type="radio" th:value="${seat + 'E'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'E'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'E'}"></label>
+					<input th:disabled="${#arrays.contains(seatsTaken, seat + 'F') and !#strings.equals(newReservation.seatIdentifierText, (seat + 'F'))}" 
+					type="radio" th:value="${seat + 'F'}" th:field="*{seatIdentifierText}"
+					th:checked="${#strings.equals(newReservation.seatIdentifierText, (seat + 'F'))}"/><label th:for="${#ids.prev('seatIdentifierText')}" th:text="${seat +'F'}"></label>
+				</div>
+			</div>
+			<input name="id" th:value="${id}" type="hidden" />
+			<input type="submit" name="submit" value="Submit" />
+		</form>
+	</div>
+</body>
+</html>
